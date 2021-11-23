@@ -1,6 +1,22 @@
 # parkrun_tokens
 Generates replacement Parkrun finish tokens that can be printed and laminated to replace lost ones
 
+Installation
+------------
+pip install python-barcode
+No additional libraries or installation required.
+
+Usage
+-----
+
+python finish_tokens.py -f output.svg 1 2 5-10 30
+Will generate tokens 1, 2, 5, 6, 7, 8, 9, 10, 30 and save the output as output.svg
+Print output.svg, laminate and cut up to use as finish tokens.
+
+The output looks like:
+![output example](https://raw.githubusercontent.com/jones139/parkrun_tokens/main/example_output.png)
+
+
 Current Status
 --------------
 
@@ -12,10 +28,15 @@ Current Status
 
 Things to Do
 ------------
-* Add a command line interface that takes a list of tokens and ranges (e.g 1-10,15,17,30-35)
 * Handle generating multiple pages if necessary
 * Provide command line options so other people can customise output without hacking the code.
 * Tidy up the code - it uses python-barcode in quite a hacky way, using (supposedly) private members to access the xml to insert it into the page.
 * Tidy up the code - it uses a modified version of the python-barcode SVGWriter.  It would be good to move the token drawing code out of there so we can
  use an unmodified SVGWriter to simplify the code further for ease of future maintenance.
  * Prettify the output - they look very ugly compared to the official Parkrun tokens!
+
+
+Contact
+-------
+Graham Jones, grahamjones139@gmail.com
+
