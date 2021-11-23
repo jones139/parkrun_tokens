@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-
+import argparse
 import gzip
 import os
 from typing import BinaryIO
@@ -178,7 +178,7 @@ def makeTokensPage(tokensList):
         tokenCode = barcode.Code128(tokenVal, writer=ParkrunTokenWriter())
         tokenSvg = tokenCode.render(writer_options={"module_width":0.4,
                                                     "module_height":10.})
-        print(tokenSvg)
+        #print(tokenSvg)
 
         elem = document.createElement("svg")
         attributes= { "x": SIZE.format(xpos),
@@ -200,30 +200,38 @@ def makeTokensPage(tokensList):
     )
     #print(svgTxt)
     return(svgTxt)
-        
+
+
 def main():
     print("finish_tokens.main()")
-    tokenVal = "P0001"
-    #tokenCode = barcode.Code128(tokenVal, writer=barcode.writer.SVGWriter())
-    #tokenCode.save("%s" % tokenVal)
 
-    tokenVal = "P0002"
-    #tokenCode = barcode.Code128(tokenVal, writer=ParkrunTokenWriter())
-    #print("get_fullcode(): ",tokenCode.get_fullcode())
-    #print(tokenCode.render())
-    
-    #tokenCode.save("%s" % tokenVal)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("tokenListInput", nargs="+",
+                        help="list of token numbers and ranges to generate (e.g 3 4 10-15 21-23 30)")
+    parser.add_argument("-f", default="tokenPage.svg",
+                        help="output filename (Default tokenPage.svg)")
+    args = vars(parser.parse_args())
+    print(args)
 
-    # tokenPng = barcode.Code128(tokenVal, writer=barcode.writer.ImageWriter())
-    # tokenPng.save(tokenVal)
+    tokenLst = []
+    for tokId in args['tokenListInput']:
+        print(tokId)
+        if tokId.isdigit():
+            tokenLst.append("P%04d" % int(tokId))
+        else:
+            if (len(tokId.split('-')) == 2):
+                startStr, endStr = tokId.split('-')
+                for n in range(int(startStr), int(endStr)+1):
+                    tokenLst.append("P%04d" % n)
+                
+    print(tokenLst)
 
-
-    tokenLst = ["P0001", "P0002", "P0009"]
     svgTxt = makeTokensPage(tokenLst)
 
-    outFile = open("tokenPage.svg","w")
+    outFile = open(args['f'], "w")
     outFile.write(svgTxt.decode("utf-8"))
     outFile.close()
 
+    
 if (__name__ == "__main__"):
     main()
