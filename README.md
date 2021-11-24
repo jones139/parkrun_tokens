@@ -4,16 +4,20 @@ Generates replacement Parkrun finish tokens that can be printed and laminated to
 Installation
 ------------
 pip install python-barcode
-No additional libraries or installation required.
+
+No additional libraries or installation required - it runs from this directory.
 
 Usage
 -----
 
 python finish_tokens.py -f output.svg 1 2 5-10 30
+
 Will generate tokens 1, 2, 5, 6, 7, 8, 9, 10, 30 and save the output as output.svg
+
 Print output.svg, laminate and cut up to use as finish tokens.
 
 The output looks like:
+
 ![output example](https://raw.githubusercontent.com/jones139/parkrun_tokens/main/example_output.png)
 
 
