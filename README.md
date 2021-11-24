@@ -10,9 +10,26 @@ No additional libraries or installation required - it runs from this directory.
 Usage
 -----
 
-python finish_tokens.py -f output.svg 1 2 5-10 30
+usage: finish_tokens.py [-h] [-f OUTFILE] [-t TITLE]
+                        tokenListInput [tokenListInput ...]
 
-Will generate tokens 1, 2, 5, 6, 7, 8, 9, 10, 30 and save the output as output.svg
+positional arguments:
+  tokenListInput        list of token numbers and ranges to generate (e.g 3 4
+                        10-15 21-23 30)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f OUTFILE, --outFile OUTFILE
+                        output filename (without extension) Default
+                        'tokenPage'
+  -t TITLE, --title TITLE
+                        title to print on the top of each token
+
+Example:
+
+python finish_tokens.py -f output -t "Hartlepool Parkrun" 1 2 5-10 30
+
+Will generate tokens 1, 2, 5, 6, 7, 8, 9, 10, 30 with title "Hartlepool Parkrun" and save the output as output_1.svg
 
 Print output.svg, laminate and cut up to use as finish tokens.
 
