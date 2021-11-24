@@ -10,6 +10,7 @@ No additional libraries or installation required - it runs from this directory.
 Usage
 -----
 
+'''
 usage: finish_tokens.py [-h] [-f OUTFILE] [-t TITLE]
                         tokenListInput [tokenListInput ...]
 
@@ -24,10 +25,13 @@ optional arguments:
                         'tokenPage'
   -t TITLE, --title TITLE
                         title to print on the top of each token
+'''
 
 Example:
 
+```
 python finish_tokens.py -f output -t "Hartlepool Parkrun" 1 2 5-10 30
+```
 
 Will generate tokens 1, 2, 5, 6, 7, 8, 9, 10, 30 with title "Hartlepool Parkrun" and save the output as output_1.svg
 
