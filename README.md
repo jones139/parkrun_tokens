@@ -10,7 +10,7 @@ No additional libraries or installation required - it runs from this directory.
 Usage
 -----
 
-'''
+```
 usage: finish_tokens.py [-h] [-f OUTFILE] [-t TITLE]
                         tokenListInput [tokenListInput ...]
 
@@ -25,7 +25,7 @@ optional arguments:
                         'tokenPage'
   -t TITLE, --title TITLE
                         title to print on the top of each token
-'''
+```
 
 Example:
 
