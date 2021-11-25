@@ -5,8 +5,7 @@ This programme generates replacement Parkrun finish tokens that can be printed a
 
 You can then print them, laminate them and cut them up ready for use.
 
-![completed tokens](https://raw.githubusercontent.com/jones139/parkrun_tokens/main/complete_set_of_tokens.jpg)
-
+<img src="https://raw.githubusercontent.com/jones139/parkrun_tokens/main/complete_set_of_tokens.jpg" width="400px">
 
 Installation
 ------------
@@ -47,7 +46,7 @@ The output looks like:
 
 ![output example](https://raw.githubusercontent.com/jones139/parkrun_tokens/main/example_output.png)
 
-Print output.svg, laminate and cut up to use as finish tokens.  
+Print the generated .svg files, laminate and cut up to use as finish tokens.  
 
 I found that a guillotine to cut the tokens into strips, then scissors to cut around each token worked well.  A standard hole punch can be used for the holes, but it takes a bit of practice to work out where to hold the token to punch the hole in the correct place.
 
