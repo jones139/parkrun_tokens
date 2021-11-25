@@ -8,19 +8,19 @@ import barcode
 ###########################
 # Define Token Parameters #
 ###########################
-PAGE_WIDTH = 290 # mm
-PAGE_HEIGHT = 210 # mm
-TOKEN_SPACING = 2 # mm - space between tokens on the page
+PAGE_WIDTH = 290  # mm
+PAGE_HEIGHT = 210  # mm
+TOKEN_SPACING = 2  # mm - space between tokens on the page
 TOKEN_WIDTH = 55  # mm
-TOKEN_HEIGHT = 25 # mm
-BORDER_RADIUS = 3 # mm
-BARCODE_X_OFFSET = 5 # mm
-BARCODE_Y_OFFSET = 7 # mm
-BARCODE_LINE_WIDTH = 0.4 # mm
-BARCODE_LINE_HEIGHT = 10 # mm
-HOLE_X_OFFSET = 7 # mm
-HOLE_DIA = 4 # mm
-TEXT_Y_OFFSET = 5 # mm
+TOKEN_HEIGHT = 25  # mm
+BORDER_RADIUS = 3  # mm
+BARCODE_X_OFFSET = 5  # mm
+BARCODE_Y_OFFSET = 6  # mm
+BARCODE_LINE_WIDTH = 0.4  # mm
+BARCODE_LINE_HEIGHT = 10  # mm
+HOLE_X_OFFSET = 7  # mm
+HOLE_DIA = 4  # mm
+TEXT_Y_OFFSET = 5  # mm
 FOREGROUND_COLOUR = "#000000"  # black
 BACKGROUND_COLOUR = "#ffffff"  # white
 FONT_SIZE = 12
