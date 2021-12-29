@@ -36,6 +36,12 @@ def finishTokens():
     print("prNameTxt=",prNameTxt)
     print("tokensTxt=",tokensTxt)
     tokenLst = finish_tokens.makeTokenList(tokensTxt)
+
+    # Avoid crashing the system if someone tries to ask for a huge numbers
+    # of tokens at the same time.
+    if len(tokenLst)>350:
+        tokenLst = tokenLst[:350]
+
     zipBytesIO = finish_tokens.getTokensZipFile(tokenLst,prNameTxt)
     #tmpFilesLst.append(zipFname)
     #print("tmpFilesLst=",tmpFilesLst)
