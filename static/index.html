@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Tokens</title>
+  </head>
+  <body>
+    <h1>Parkrun Tokens and Barcodes</h1>
+    <p>This page allows users to generate replacement Parkrun finish tokens
+      and (in the future will) allow custom runner barcodes to be generated
+      If there are any issues please email graham@openseizuredetector.org.uk.
+    </p>
+    <h1>Finish Tokens</h1>
+    <form action="/finish-tokens" method="post">
+      <label for="pRunName">Parkrun Name: </label>
+      <input type="text" id="pRunName" name="pRunName"/> <br/>
+      <label for="tokensTxt">Tokens to Generate (e.g. 1 2 5-10): </label>
+      <input type="text" id="tokensTxt" name="tokensTxt"/> <br/>
+      <input type="submit" value="Submit"/>
+    </form>
+  </body>
+</html>

@@ -7,7 +7,7 @@ You can then print them, laminate them and cut them up ready for use.
 
 <img src="https://raw.githubusercontent.com/jones139/parkrun_tokens/main/complete_set_of_tokens.jpg" width="400px">
 
-Installation
+Local Installation
 ------------
 pip install python-barcode
 
@@ -61,6 +61,28 @@ Current Status of Code
 * Writes a given title across the top.
 * Takes a list of token numbers and arranges them on one or more A4 pages as necessary.
 
+
+Web Interface
+-------------
+Although running python scripts is trivial for us Linux/Unix users, that is
+not the case for folks running Windows....  So to make it easier I have
+created a simple web interface that runs the finish_tokens.py script
+based on the text entered on a web page.
+
+The Flask based web app is store in main.py and it is run within a Docker
+container to (hopefully) make set-up and installation easier.
+
+I can never remember docker commands so I have produced a Makefile that means
+we can do:
+  * make build - create a docker image that will run this web app.
+  * make start - start a docker container running the image made with 'make build'
+  * make stop - stop the container
+  * make logs - list the output logs for debugging
+  * make shell - log into the container so you can look around at what ishappening.
+
+After doing 'make build' then 'make start' the web page should be visible at
+http://localhost:56733
+Entering the parkrun name and tokens to generate, then pressing the 'Submit' button shoudl result in a zip file being downloaded that contains the SVG images of the token pages.
 
 Things to Do
 ------------

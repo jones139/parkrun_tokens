@@ -2,6 +2,9 @@
 
 import argparse
 import os
+import io
+import tempfile
+import zipfile
 import xml.dom
 import barcode
 
@@ -169,6 +172,58 @@ def makeTokensPage(tokensList, titleStr="tokenPage"):
     #print(svgTxt)
     return(svgTxt)
 
+def makeTokenList(tokenListStr):
+    tokenLst = []
+    for tokId in tokenListStr.split(' '):
+        print(tokId)
+        if tokId.isdigit():
+            tokenLst.append("P%04d" % int(tokId))
+        else:
+            if (len(tokId.split('-')) == 2):
+                startStr, endStr = tokId.split('-')
+                for n in range(int(startStr), int(endStr)+1):
+                    tokenLst.append("P%04d" % n)
+    return(tokenLst)
+
+def getTokensPerPage():
+    nrows = int((PAGE_HEIGHT - TOKEN_SPACING) /
+                (TOKEN_HEIGHT + TOKEN_SPACING))
+    ncols = int((PAGE_WIDTH - TOKEN_SPACING) /
+                (TOKEN_WIDTH + TOKEN_SPACING))
+    tokensPerPage = nrows * ncols
+    print("getTokensPerPage(): nrows=%d, ncols=%d, tokens per page = %d" %
+          (nrows, ncols, tokensPerPage))
+    return(tokensPerPage)
+
+def getTokensZipFile(tokenLst, titleStr):
+    ''' based on https://www.neilgrogan.com/py-bin-zip/
+    returns the path to the created zip file.
+    '''
+    svgFname = "tokens"
+    tmpDir = tempfile.mkdtemp()
+    tokensPerPage = getTokensPerPage()
+
+    startToken = 0
+    pageNo = 1
+    outFilesLst = []  # List of tuples (file name, contents)
+    while(startToken < len(tokenLst)):
+          pageTokens = tokenLst[startToken:startToken+tokensPerPage]
+          startToken += tokensPerPage
+          svgTxt = makeTokensPage(pageTokens, titleStr = titleStr)
+          outFileName = "%s_%d.svg" % (svgFname, pageNo)
+          outFilesLst.append((outFileName,svgTxt))
+          pageNo += 1
+          startToken = (pageNo-1)*tokensPerPage
+    #mem_zip = io.BytesIO()
+    #print(outFilesLst)
+    (fh, fname) = tempfile.mkstemp(suffix=".zip")
+    print("temp fname = ",fname)
+    with zipfile.ZipFile(fname, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for f in outFilesLst:
+            zf.writestr(f[0],f[1])
+    #print(mem_zip)
+    return(fname)
+
 
 def main():
     print("finish_tokens.main()")
@@ -183,27 +238,11 @@ def main():
     args = vars(parser.parse_args())
     print(args)
 
-    tokenLst = []
-    for tokId in args['tokenListInput']:
-        print(tokId)
-        if tokId.isdigit():
-            tokenLst.append("P%04d" % int(tokId))
-        else:
-            if (len(tokId.split('-')) == 2):
-                startStr, endStr = tokId.split('-')
-                for n in range(int(startStr), int(endStr)+1):
-                    tokenLst.append("P%04d" % n)
-                
+    tokenLst = makeTokenList(args['tokenListInput'])
     #print(tokenLst)
 
-    nrows = int((PAGE_HEIGHT - TOKEN_SPACING) /
-                (TOKEN_HEIGHT + TOKEN_SPACING))
-    ncols = int((PAGE_WIDTH - TOKEN_SPACING) /
-                (TOKEN_WIDTH + TOKEN_SPACING))
-    tokensPerPage = nrows * ncols
+    tokensPerPage = getTokensPerPage()
 
-    print("nrows=%d, ncols=%d, tokens per page = %d" %
-          (nrows, ncols, tokensPerPage))
 
     startToken = 0
     pageNo = 1
