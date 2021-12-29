@@ -1,8 +1,6 @@
 .*
 *~
 *#
-python-barcode
-barcode
 *.svg
 
 # Byte-compiled / optimized / DLL files
