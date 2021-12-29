@@ -174,7 +174,10 @@ def makeTokensPage(tokensList, titleStr="tokenPage"):
 
 def makeTokenList(tokenListStr):
     tokenLst = []
-    for tokId in tokenListStr.split(' '):
+    # replace commas with spaces so we can use either space or
+    # comma separated lists.
+    tokenListStrSpaceSep = tokenListStr.replace(',',' ')
+    for tokId in tokenListStrSpaceSep.split(' '):
         print(tokId)
         if tokId.isdigit():
             tokenLst.append("P%04d" % int(tokId))

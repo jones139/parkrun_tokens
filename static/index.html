@@ -1,20 +1,119 @@
 <html>
   <head>
     <title>Tokens</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Parkrun Tokens and Barcodes</h1>
-    <p>This page allows users to generate replacement Parkrun finish tokens
-      and (in the future will) allow custom runner barcodes to be generated
-      If there are any issues please email graham@openseizuredetector.org.uk.
+    <h1>Parkrun Tokens and Barcodes Generator</h1>
+    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
+      <a href="#partBarcodes">Participants' Barcodes</a> |
+      <a href="#about">About</a>
+      </p>
+    <img width=200px src="./tokens.png" alt="Image of Generated Tokens"/>
+    <p>This <a href="#finishTokens">Token Generator Tool</a> allows users to generate replacement Parkrun finish tokens
+      and (in the future will) allow custom runner barcodes to be generated.  Details of what it does and how it works are in the <a href="#about">About</a> section below.
     </p>
-    <h1>Finish Tokens</h1>
+    <p>
+      If there are any issues please email <a href="mailto:graham@openseizuredetector.org.uk">graham@openseizuredetector.org.uk</a>.
+    </p>
+    <h1 id="finishTokens">Finish Tokens</h1>
+    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
+      <a href="#partBarcodes">Participants' Barcodes</a> |
+      <a href="#about">About</a>
+      </p>
     <form action="/finish-tokens" method="post">
       <label for="pRunName">Parkrun Name: </label>
-      <input type="text" id="pRunName" name="pRunName"/> <br/>
+      <input type="text" id="pRunName" name="pRunName" value="Hartlepool Parkrun"/> <br/>
       <label for="tokensTxt">Tokens to Generate (e.g. 1 2 5-10): </label>
-      <input type="text" id="tokensTxt" name="tokensTxt"/> <br/>
+      <input type="text" id="tokensTxt" name="tokensTxt" value="1-10 15 16"/> <br/>
       <input type="submit" value="Submit"/>
     </form>
+    <h1 id="partBarcodes">Participant's Barcodes</h1>
+    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
+      <a href="#partBarcodes">Participants' Barcodes</a> |
+      <a href="#about">About</a>
+      </p>
+    <p>Not done yet.....  The idea is to allow users to generate barcodes
+      of different sizes with various borders etc.   I'll need someone
+      artistic to help with this though!</p>
+    <h1 id="about">About</h1>
+    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
+      <a href="#partBarcodes">Participants' Barcodes</a> |
+      <a href="#about">About</a>
+      </p>
+    <h2>Why?</h2>
+    <p>This tool was developed because at Hartlepool Parkrun we were having
+      issues with 'losing' finishing tokens from our nice set of the new
+      (2019) style  finish tokens.   We were replacing them with tokens from
+      our old set which were a different shape...and the reason we scrapped
+      the old set was that they were worn and difficult to scan.   The
+      barcode stickers that we had were only good for a couple of uses then
+      started to wear off and become just as difficult to scan.   Rather
+      than go to the waste of buying a whole new set of tokens for a few
+      replacements, I decided to make our own temporary replacements that
+      would be compatible with the
+      <a href='https://play.google.com/store/apps/details?id=com.parkrun.virtualVolunteer&hl=en_GB&gl=US' target="_blank" >
+	'Virtual Volunteer'</a> scanning app.
+    </p>
+    <p>I thought that other parkruns might be in a similar position so might
+      find it useful, so turned it into a web based application
+    </p>
+    
+    <h2>What it Does</h2>
+    <p>The <a href="#finishTokens">Finish Token Generator Tool</a> takes a user-specified list of finish
+      positions for which tokens are to be generated and the name of the
+      parkrun they are for.  It then generates one or more Scalable Vector
+      Graphics SVG) files that represent A4 pages to be printed to make the
+      tokens.   These are downloaded in a zip file onto the user's computer.
+      The user opens the file and prints out each page in turn.
+      </p>
+    <img width=400px src='token_page.png' alt="Example Token Page"/>
+    <img width=200px src="./tokens.png" alt="Image of Generated Tokens"/>
+    <p>
+      The user can then laminate the printed pages and cut out the
+      tokens.
+      The size is similar to the Parkrun tokens so they can be
+      stacked along with the real tokens.   An example of the finished
+      tokens is shown above.
+    </p>
+    <h2>How It Works</h2>
+    <p>The tool is completely free and Open Source (<a href='https://github.com/jones139/parkrun_tokens/blob/main/LICENSE' target="_blank" >GPL v3 Licence</a>).  The source code is available on GitHub in my <a href='https://github.com/jones139/parkrun_tokens'>parkrun_tokens repository</a> for anyone to use or modify.  It is written in Python so quite easy to see what it is doing.
+      </p>
+    <p>The heart of the system is the open source
+      <a href='https://github.com/WhyNotHugo/python-barcode.git'>python-barcode library</a>
+      which is used to generate the barcode part of the token as SVG graphics.
+      The
+      <a href='https://github.com/jones139/parkrun_tokens/blob/main/finish_tokens.py'>finish_tokens.py</a>
+      script accepts a list of position numbers and a
+      parkrun name and generates a single SVG image of the finish token for
+      each finish position.  If the user requests more tokens than will fit on
+      an A4 page, it generates multiple pages as separate SVG files.
+      finish_tokens.py can be run as a simple command line application.
+    </p>
+    <p>I am conscious that many people are not used to using command line
+      utilities, so I thought I should provide a graphical interface.
+      To save the trouble of trying to work out how to install it on
+      Windows and Macintosh computers, I made it a web application.
+      The web application is in the <a href='https://github.com/jones139/parkrun_tokens/blob/main/main.py'>main.py</a> script, which uses the Flask python web framework.
+    <p>A couple of people have tried to persuade me that using Docker
+      containers is a good way of distributing web applications, so I have
+      tried that.   Typing 'make build' will build a docker image for the
+      app, then 'make start' will run it.  The web page should be visible at
+      http://localhost:56733.  I have it running on a virtual server at
+      https://barcodes.ddns.net where the nginx web server redirects to the
+      port 56733 so the end user does not need to know about that.
+    </p>
+      <h2>Contribuions</h2>
+    <p>I am happy to receive any suggestions or improvements to the code.   Please either drop me an email to <a href="mailto:graham@openseizuredetector.org.uk">graham@openseizuredetector.org.uk</a> or raise an issue or pull request on the <a href='https://github.com/jones139/parkrun_tokens'>github repository</a>. </p>
+    <h2>Acknowledements</h2>
+    <ul>
+      <li><a href='https://github.com/WhyNotHugo'>Hugo Osvaldo Barrera</a> - python-barcode library, which is essential for this project.</li>
+      <li><a href='https://github.com/pallets/flask'>Flask Project</a> - python web application framework for web based tool</li>
+      <li><a href='https://openseizuredetector.org.uk'>OpenSeizureDetector Project</a> - because I am using its server to host this page!
+      </ul>
+    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
+      <a href="#partBarcodes">Participants' Barcodes</a> |
+      <a href="#about">About</a>
+    </p>
   </body>
 </html>
