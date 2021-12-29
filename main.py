@@ -36,10 +36,10 @@ def finishTokens():
     print("prNameTxt=",prNameTxt)
     print("tokensTxt=",tokensTxt)
     tokenLst = finish_tokens.makeTokenList(tokensTxt)
-    zipFname = finish_tokens.getTokensZipFile(tokenLst,prNameTxt)
-    tmpFilesLst.append(zipFname)
-    print("tmpFilesLst=",tmpFilesLst)
-    return(flask.send_file(zipFname, attachment_filename="tokens.zip", as_attachment=True))
+    zipBytesIO = finish_tokens.getTokensZipFile(tokenLst,prNameTxt)
+    #tmpFilesLst.append(zipFname)
+    #print("tmpFilesLst=",tmpFilesLst)
+    return(flask.send_file(zipBytesIO, attachment_filename="tokens.zip", as_attachment=True))
 
 
 if __name__ == "__main__":

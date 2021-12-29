@@ -200,10 +200,11 @@ def getTokensPerPage():
 
 def getTokensZipFile(tokenLst, titleStr):
     ''' based on https://www.neilgrogan.com/py-bin-zip/
-    returns the path to the created zip file.
+    returns a BytesIO object that can be processed as a file witout
+    saving the file to disk..
     '''
     svgFname = "tokens"
-    tmpDir = tempfile.mkdtemp()
+    #tmpDir = tempfile.mkdtemp()
     tokensPerPage = getTokensPerPage()
 
     startToken = 0
@@ -217,15 +218,17 @@ def getTokensZipFile(tokenLst, titleStr):
           outFilesLst.append((outFileName,svgTxt))
           pageNo += 1
           startToken = (pageNo-1)*tokensPerPage
-    #mem_zip = io.BytesIO()
+    mem_zip = io.BytesIO()
     #print(outFilesLst)
-    (fh, fname) = tempfile.mkstemp(suffix=".zip")
-    print("temp fname = ",fname)
-    with zipfile.ZipFile(fname, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
+    #(fh, fname) = tempfile.mkstemp(suffix=".zip")
+    #print("temp fname = ",fname)
+    with zipfile.ZipFile(mem_zip, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
         for f in outFilesLst:
             zf.writestr(f[0],f[1])
     #print(mem_zip)
-    return(fname)
+    # Return to start of zip file
+    mem_zip.seek(0)
+    return(mem_zip)
 
 
 def main():

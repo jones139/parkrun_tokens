@@ -15,7 +15,7 @@ build:
 start:
 	-docker stop ${APP}
 	-docker rm ${APP}   # - allows Make to continue if rm gives error because APP does not exist.
-	docker run -d --name ${APP} -p 56733:80 ${APP}
+	docker run -d --restart always --name ${APP} -p 56733:80 ${APP}
 stop:
 	-docker stop ${APP}
 shell:
