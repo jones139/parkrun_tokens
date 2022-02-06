@@ -41,9 +41,27 @@
       <li><a href="#about">About</a></li>
     </ul>
     <h1 id="partBarcodes">Participant's Barcodes</h1>
-    <p>Not done yet.....  The idea is to allow users to generate barcodes
-      of different sizes with various borders etc.   I'll need someone
-      artistic to help with this though!</p>
+    <form action="/personal-barcode" method="post">
+      <label for="runnerId">Runner Id (including 'A'): </label>
+      <input type="text" id="runnerId" name="id" value=""/> <br/>
+      <label for="runnerName">Runner Name: </label>
+      <input type="text" id="runnerName" name="name" value=""/> <br/>
+      <label for="runnerIce">ICE: </label>
+      <input type="text" id="runnerIce" name="ice" value=""/> <br/>
+<!--      <label for="runnerMedical">Medical Conditions: </label>
+      <input type="text" id="runnerMedical" name="medical" value="none"/> <br/>-->
+      <input type="submit" value="Submit"/>
+    </form>
+    <p><b>Notes:</b>
+      <ul>
+	<li>The generated page is designed to be printed in landscape
+      format - if you print it in portrait mode it may be scaled to fit on
+	  the page, resuting in undersized tokens.</li>
+	<li>Please Check you have entered the correct Runner ID - look at https://www.parkrun.org.uk/parkrunner/[Your ID without the 'A']</li>
+	</ul>
+      </p>
+
+
     <ul class='menu-bar'>
       <li><a href="#finishTokens">Finish Tokens</a> </li>
       <li><a href="#partBarcodes">Participants' Barcodes</a> </li>

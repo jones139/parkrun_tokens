@@ -1,6 +1,7 @@
 import os
 import flask
 import finish_tokens
+import personal_barcodes
 import json
 import werkzeug
 
@@ -46,6 +47,23 @@ def finishTokens():
     #tmpFilesLst.append(zipFname)
     #print("tmpFilesLst=",tmpFilesLst)
     return(flask.send_file(zipBytesIO, attachment_filename="tokens.zip", as_attachment=True))
+
+@app.route("/personal-barcode", methods=['GET', 'POST'])
+def personalBarcodes():
+    print(flask.request.values)
+    deleteTmpFiles()
+    runnerId = flask.request.values.get('id')
+    runnerName = flask.request.values.get('name')
+    runnerIce = flask.request.values.get('ice')
+    runnerMedical = flask.request.values.get('medical')
+    dataTxt = flask.request.data.decode("utf-8")
+
+    zipBytesIO = personal_barcodes.getPersonalBarcodeZipFile(
+        runnerId, runnerName, runnerIce, runnerMedical)
+    #tmpFilesLst.append(zipFname)
+    #print("tmpFilesLst=",tmpFilesLst)
+    return(flask.send_file(zipBytesIO, attachment_filename="tokens.zip", as_attachment=True))
+
 
 
 if __name__ == "__main__":
