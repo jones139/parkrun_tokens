@@ -30,6 +30,7 @@
       <input type="text" id="tokensTxt" name="tokensTxt" value="1-10 15 16"/> <br/>
       <input type="submit" value="Submit"/>
     </form>
+    
     <ul class='menu-bar'>
       <li><a href="#finishTokens">Finish Tokens</a> </li>
       <li><a href="#partBarcodes">Participants' Barcodes</a> </li>
@@ -70,7 +71,7 @@
       Graphics SVG) files that represent A4 pages to be printed to make the
       tokens.   These are downloaded in a zip file onto the user's computer.
       The user opens the file and prints out each page in turn.
-      </p>
+    </p>
     <img width=400px src='token_page.png' alt="Example Token Page"/>
     <img width=200px src="./tokens.png" alt="Image of Generated Tokens"/>
     <p>
@@ -80,6 +81,10 @@
       stacked along with the real tokens.   An example of the finished
       tokens is shown above.
     </p>
+    <p>Note:  The generated page is designed to be printed in landscape
+      format - if you print it in portrait mode it may be scaled to fit on
+      the page, resuting in undersized tokens.
+      </p>
     <h2>How It Works</h2>
     <p>The tool is completely free and Open Source (<a href='https://github.com/jones139/parkrun_tokens/blob/main/LICENSE' target="_blank" >GPL v3 Licence</a>).  The source code is available on GitHub in my <a href='https://github.com/jones139/parkrun_tokens'>parkrun_tokens repository</a> for anyone to use or modify.  It is written in Python so quite easy to see what it is doing.
       </p>
@@ -115,9 +120,10 @@
       <li><a href='https://github.com/pallets/flask'>Flask Project</a> - python web application framework for web based tool</li>
       <li><a href='https://openseizuredetector.org.uk'>OpenSeizureDetector Project</a> - because I am using its server to host this page!
       </ul>
-    <p id='menu-bar'><a href="#finishTokens">Finish Tokens</a> |
-      <a href="#partBarcodes">Participants' Barcodes</a> |
-      <a href="#about">About</a>
-    </p>
+    <ul class='menu-bar'>
+      <li><a href="#finishTokens">Finish Tokens</a> </li>
+      <li><a href="#partBarcodes">Participants' Barcodes</a> </li>
+      <li><a href="#about">About</a></li>
+    </ul>
   </body>
 </html>
