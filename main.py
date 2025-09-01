@@ -46,7 +46,7 @@ def finishTokens():
     zipBytesIO = finish_tokens.getTokensZipFile(tokenLst,prNameTxt)
     #tmpFilesLst.append(zipFname)
     #print("tmpFilesLst=",tmpFilesLst)
-    return(flask.send_file(zipBytesIO, attachment_filename="tokens.zip", as_attachment=True))
+    return(flask.send_file(zipBytesIO, download_name="tokens.zip", as_attachment=True))
 
 @app.route("/personal-barcode", methods=['GET', 'POST'])
 def personalBarcodes():
